@@ -1,4 +1,8 @@
 {
+  "instance_url":"http://localhost:8080/",
+  "user": "",
+  "pwd":  "",
+  "gee": "ERA5_DAILY",
   "ouroot":"E4h5WBOg71F",
   "fromperiod": "2018-08-23",
   "toperiod": "2018-09-02"

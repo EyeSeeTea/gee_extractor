@@ -15,9 +15,9 @@ def initializeGoogleEarth():
 def read_parameters_from_file(file_path):
     with open(file_path) as f:
         conf_file = json.load(f)
-        return conf_file["ouroot"], datetime.strptime(conf_file["fromperiod"], "%Y-%m-%d"), datetime.strptime(conf_file["toperiod"], "%Y-%m-%d")
+        return conf_file["instance_url"], conf_file["user"], conf_file["pwd"], conf_file['gee'], conf_file["ouroot"], datetime.strptime(conf_file["fromperiod"], "%Y-%m-%d"), datetime.strptime(conf_file["toperiod"], "%Y-%m-%d")
 
-def print_check_arguments(conf, ouroot, fromperiod, toperiod, configurationfile):
+def print_check_arguments(conf, instance_url, user, pwd, gee, ouroot, fromperiod, toperiod, configurationfile):
     print('Received the following arguments:')
     print('--conf flag: ', conf)
     if conf:
@@ -25,10 +25,12 @@ def print_check_arguments(conf, ouroot, fromperiod, toperiod, configurationfile)
         if not all([configurationfile]):
             print('Error: With conf flag activated, configuration file path cannot be None')
             return False
+    print('--instance_url', instance_url)
+    print('--gee', gee)
     print('--ouroot option: ', ouroot)
     print('--fromPeriod option: ', fromperiod)
     print('--toPeriod option: ', toperiod)
-    if not all([ouroot, fromperiod, toperiod]):
+    if not all([instance_url, user, pwd, gee, ouroot, fromperiod, toperiod]):
         print('Error: With conf flag disactivated, all options must be specified')
         return False
     return True
