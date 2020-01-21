@@ -34,13 +34,10 @@ The scripts contains the following customized parameters:
 * ``toperiod``: Highest limit from the time interval desired for the data import.
 
 ## Usage
-
+```bash
 Usage: run.py [OPTIONS] [CONFIGURATIONFILE]
-
   Run gee_extractor
-
   CONFIGURATIONFILE contains all the parameters if -c flag is activated
-
 Options:
   -c, --conf
   --instance_url TEXT      DHIS2 instance root URL
@@ -56,6 +53,8 @@ Options:
   --toPeriod [%Y-%m-%d]    Highest limit from the time interval desired for
                            the data import
   --help                   Show this message and exit.
+```
+
 
 To provide all the parameters by command line, this script just needs to be invoked as follows
 
