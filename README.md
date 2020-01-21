@@ -22,6 +22,17 @@ Python requirements
 pip install -r requirements.txt
 ~~~~~~
 
+Get Google Earth Engine credentials: Whiting your python environment run the following command and follow the resulting printed isntructions. A URL will be provided that generates an authorization code upon agreement.
+~~~~~~
+earthengine authenticate
+~~~~~~
+
+Upon entering the authorization code, an authorization token gets saved to a credentials file which can be found below. Subsequent use of the API's ee.Initialize() command and the earthengine command line tool will look to this file to authenticate. If you want to revoke authorization, simply delete the credentials file.
+~~~~~~
+$HOME/.config/earthengine/credentials
+~~~~~~
+
+
 ## Configuration
 
 The scripts contains the following customized parameters:
@@ -57,12 +68,14 @@ Options:
 
 
 To provide all the parameters by command line, this script just needs to be invoked as follows
-
-$ python run.py --instance_url instance --user user --pwd pwd --gee ERA5_DAILY --outroot ou --fromPeriod fromP --toPeriod toPeriod
+~~~~~~
+python run.py --instance_url instance --user user --pwd pwd --gee ERA5_DAILY --outroot ou --fromPeriod fromP --toPeriod toPeriod
+~~~~~~
 
 Alternatively a configuration file can be specified as a positional argument like follows:
-
-$ python run.py -c CONFIGURATIONFILE
+~~~~~~
+python run.py -c CONFIGURATIONFILE
+~~~~~~
 
 An example of configuration is included in [conf.json](./conf.json)
 
