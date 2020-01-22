@@ -55,10 +55,8 @@ def run(conf, instance_url, user, pwd, gee, ouroot, fromperiod, toperiod, config
             bulk_data_values = {}
             bulk_data_values["dataValues"] = []
             if 'coordinates' in json_ou and json_ou['coordinates'] != 'NONE':
-                print(json_ou['name'])
                 if json_ou['featureType'] == 'POINT':
                     for day in helpers.daterange(fromperiod, toperiod):
-                        print(day)
                         day_dataset = dataset.select(
                             tuple(datasets.data[gee]['mappings'].keys())
                         ).filterDate(day)
@@ -70,6 +68,13 @@ def run(conf, instance_url, user, pwd, gee, ouroot, fromperiod, toperiod, config
                         if correct:
                             helpers.add_data_values(bulk_data_values, json_ou['id'], day, datasets.data[gee]['mappings'], gee_data)
                     d2.post('/dataValueSets', payload=bulk_data_values)
+                    print(">> Import done for organisation unit with name: <{}> and id: <{}> for period <{}>".format(
+                        json_ou['name'],
+                        json_ou['id'],
+                        day.strftime("%Y%m%d")
+                        ))
+                else:
+                    print("Organisation unit with name: <{}> and id: <{}> skipped do to geometry size".format(json_ou['name'], json_ou['id']))
             else:
                 print("Organisation unit with name : <{}> and id: <{}> does not have coordinates in the DHIS2 instance".format(json_ou['name'], json_ou['id']))
             next_ous += [c['id'] for c in json_ou['children']]
